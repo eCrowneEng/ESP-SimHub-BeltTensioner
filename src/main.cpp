@@ -25,6 +25,15 @@
 FullLoopbackStream outgoingStream;
 FullLoopbackStream incomingStream;
 
+#define StreamReadStringUntil incomingStream.readStringUntil
+#define StreamAvailable incomingStream.available
+#define StreamPrintln outgoingStream.println
+
+#else
+#define StreamReadStringUntil Serial.readStringUntil
+#define StreamAvailable Serial.available
+#define StreamPrintln Serial.println
+
 #endif // INCLUDE_WIFI
 
 
@@ -33,7 +42,12 @@ FullLoopbackStream incomingStream;
 
 void setup()
 {
+#if INCLUDE_WIFI
   Serial.begin(115200);
+#else
+  Serial.begin(19200);
+#endif
+// StreamPrintln(String(axisDriversCount) + " steppers enabled");
 
 #if INCLUDE_WIFI
   ECrowneWifi::setup(&outgoingStream, &incomingStream);
@@ -50,8 +64,8 @@ void loop() {
 #endif
 
   // Wait for data
-  if (incomingStream.available() > 0) {
-    String command = incomingStream.readStringUntil('\n');
+  if (StreamAvailable() > 0) {
+    String command = StreamReadStringUntil('\n');
     //processCommand(command);
   }
 
