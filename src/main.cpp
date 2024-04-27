@@ -33,32 +33,29 @@ FullLoopbackStream incomingStream;
 
 void setup()
 {
-	Serial.begin(115200);
+  Serial.begin(115200);
 
 #if INCLUDE_WIFI
-	ECrowneWifi::setup(&outgoingStream, &incomingStream);
+  ECrowneWifi::setup(&outgoingStream, &incomingStream);
 #endif
 
 
-	// insert here setup code, replacing Serial.println with outgoingStream.println
+  // insert here setup code, replacing Serial.println with outgoingStream.println
 }
-
-
-
 
 
 void loop() {
 #if INCLUDE_WIFI
-	ECrowneWifi::loop();
+  ECrowneWifi::loop();
 #endif
 
-	// Wait for data
-	if (incomingStream.available() > 0) {
-		String command = incomingStream.readStringUntil('\n');
-		//processCommand(command);
-	}
+  // Wait for data
+  if (incomingStream.available() > 0) {
+    String command = incomingStream.readStringUntil('\n');
+    //processCommand(command);
+  }
 
-	// for (int i = 0; i < axisDriversCount; i++) {
-	// 	axisDrivers[i]->loop();
-	// }
+  // for (int i = 0; i < axisDriversCount; i++) {
+  //   axisDrivers[i]->loop();
+  // }
 }
