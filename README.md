@@ -7,4 +7,5 @@ Firmware source code for ESP32 and ESP8266 that is compatible with SimHub to bui
 
 ## Original Reference
 https://www.simhubdash.com/diy-belt-tensionner/
-This code still requires the original code the be entered in the right places
+
+By default this assumes ESP32 in pins and configuration, ESP8266 may need to be tested further

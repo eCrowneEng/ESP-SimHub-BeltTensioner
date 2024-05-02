@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <EspSimHub.h>
-#include "./AxisDriver.h"
+#include <AxisDriver.h>
 
 // No longer have to define whether it's an ESP32 or ESP8266, just do an initial compilation and
 // VSCode will pick  up the right environment from platformio.ini
@@ -114,7 +114,7 @@ void processCommand(String command) {
 	}
 
 	if (!processed) {
-		outgoingStream.println("Unrecognised command");
+		StreamPrintln("Unrecognised command");
 	}
 }
 
@@ -134,7 +134,7 @@ void setup() {
     analogReadResolution(8); // Set the ADC to 8 bits resolution
   #endif
 
-  outgoingStream.println(String(axisDriversCount) + " steppers enabled");
+  StreamPrintln(String(axisDriversCount) + " steppers enabled");
 	engine.init();
 
 	for (int i = 0; i < axisDriversCount; i++) {
